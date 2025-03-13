@@ -37,6 +37,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.206'
     implementation 'redis.clients:jedis'
 
     compileOnly 'org.projectlombok:lombok'
