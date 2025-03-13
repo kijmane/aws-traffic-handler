@@ -23,6 +23,6 @@ public class UserDataLoaderTest {
     public void testLoadUsers() throws Exception {
         userDataLoader.run();
         long userCount = userRepository.count();
-        assertEquals(1000000, userCount);
+        assertEquals(1000000, userCount, "user count should match");
     }
 }

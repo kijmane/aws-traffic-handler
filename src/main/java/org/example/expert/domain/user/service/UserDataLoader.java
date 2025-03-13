@@ -18,7 +18,6 @@ public class UserDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Random random = new Random();
         for (int i = 0; i < 1000000; i++) {
             String nickname = generateRandomNickname();
             User user = new User();
