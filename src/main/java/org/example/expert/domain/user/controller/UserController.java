@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/users/search")
-    @Cacheable(value = "users", key = "#nickname")
+    @Cacheable(value = "users", key = "#nickname + #pageable.pageNumber + #pageable.pageSize")
     public ResponseEntity<Page<User>> searchUsersByNickname(@RequestParam String nickname, Pageable pageable) {
         Page<User> users = userRepository.findByNickname(nickname, pageable);
         return ResponseEntity.ok(users);
