@@ -14,4 +14,5 @@ public class TodoSearchCondition {
     private String managerNickname;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String weather;
 }

@@ -2,6 +2,7 @@ package org.example.expert.domain.todo.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.expert.client.WeatherClient;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 public class TodoController {
 
     private final TodoService todoService;
+    private final WeatherClient weatherClient;
 
     @PostMapping("/todos")
     public ResponseEntity<TodoSaveResponse> saveTodo(
@@ -52,13 +54,15 @@ public class TodoController {
             @RequestParam(required = false) String managerNickname,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
+            @RequestParam(required = false) String weather,
             @PageableDefault(size = 10, page = 0) Pageable pageable
     ) {
         TodoSearchCondition condition = new TodoSearchCondition(
                 titleKeyword,
                 managerNickname,
                 startDate,
-                endDate
+                endDate,
+                weather
         );
         return ResponseEntity.ok(todoService.searchTodos(condition, pageable));
     }

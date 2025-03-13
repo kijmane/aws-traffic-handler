@@ -47,8 +47,8 @@ public class CommentService {
         );
     }
 
-    public List<CommentResponse> getComments(long todoId) {
-        List<Comment> commentList = commentRepository.findByTodoIdWithUser(todoId);
+    public List<CommentResponse> getCommentsWithJoinFetch(long todoId) {
+        List<Comment> commentList = commentRepository.findByTodoIdWithJoinFetch(todoId);
 
         List<CommentResponse> dtoList = new ArrayList<>();
         for (Comment comment : commentList) {
