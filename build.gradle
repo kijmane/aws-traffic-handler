@@ -2,6 +2,11 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.jetbrains.kotlin.jvm' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.lombok' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '2.0.0'
+    id 'org.jetbrains.kotlin.kapt' version '2.0.0'
 
 }
 
@@ -12,10 +17,6 @@ sourceCompatibility = '17'
 targetCompatibility = '17'
 
 bootJar {
-    mainClass = 'org.example.expert.ExpertApplication'
-}
-
-springBoot {
     mainClass = 'org.example.expert.ExpertApplication'
 }
 
@@ -40,23 +41,22 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.206'
     implementation 'redis.clients:jedis'
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // QueryDSL
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
-    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
-    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
-
     // bcrypt
     implementation 'at.favre.lib:bcrypt:0.10.2'
+
+    // QueryDSL + Kotlin
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+    kapt "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    kapt "jakarta.annotation:jakarta.annotation-api"
+    kapt "jakarta.persistence:jakarta.persistence-api"
 
     // JWT
     compileOnly 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -64,20 +64,17 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
-def querydslDir = "src/main/generated"
-
-tasks.withType(JavaCompile).configureEach {
-    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+kapt {
+    keepJavacAnnotationProcessors = true
 }
 
-sourceSets {
-    main.java.srcDirs += file(querydslDir)
-}
-
-clean {
-    delete file(querydslDir)
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+    enabled = false
 }

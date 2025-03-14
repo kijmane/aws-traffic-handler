@@ -19,7 +19,7 @@ public class S3Config {
     @Value("${aws.secretAccessKey}")
     private String secretAccessKey;
 
-    @Value("${aws.region}")
+    @Value("ap-northeast-2")
     private String region;
 
     @Bean
@@ -28,7 +28,7 @@ public class S3Config {
 
         return AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withRegion(String.valueOf(Region.getRegion(Regions.valueOf(region))))
+                .withRegion(String.valueOf(Region.getRegion(Regions.fromName(region))))
                 .build();
     }
 }
