@@ -2,7 +2,6 @@
 
 ## AWS 콘솔 캡처
 ### 1. EC2 인스턴스 상세 설정
-<img width="1397" alt="EC2 인스턴스" src="https://github.com/user-attachments/assets/4aec6275-259b-4973-a5c4-0b00af1b1d86" />
 
 ### 2. EC2 보안 그룹 설정
 <img width="1135" alt="EC2 보안 그룹" src="https://github.com/user-attachments/assets/abf9197d-5266-41be-a875-eacee92013b5" />
