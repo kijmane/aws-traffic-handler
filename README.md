@@ -11,5 +11,4 @@
 
 ### 4. Health Check API 호출 결과
 - 서버가 정상 작동 중일 때 /health 엔드포인트에 접속한 결과입니다.
-- [바로가기](http://15.164.170.51:8080/health)
 <img width="1207" alt="스크린샷 2025-03-14 오후 2 15 14" src="https://github.com/user-attachments/assets/99684801-e229-4fee-8439-976f9590e3fc" />
