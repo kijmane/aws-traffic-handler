@@ -1,1 +1,17 @@
-# SPRING PLUS
+# Expert Backend Deployment (Spring Boot + AWS)
+
+## AWS 콘솔 캡처
+### 1. EC2 인스턴스 상세 설정
+<img width="1397" alt="EC2 인스턴스" src="https://github.com/user-attachments/assets/4aec6275-259b-4973-a5c4-0b00af1b1d86" />
+
+### 2. EC2 보안 그룹 설정
+<img width="1135" alt="EC2 보안 그룹" src="https://github.com/user-attachments/assets/abf9197d-5266-41be-a875-eacee92013b5" />
+
+### 3. Health Check API 호출 결과
+서버가 정상 작동 중일 때 /health 엔드포인트에 접속한 결과입니다.
+[바로가기]([https://example.com](http://15.164.170.51:8080/health))
+<img width="1440" alt="스크린샷 2025-03-14 오후 12 16 47" src="https://github.com/user-attachments/assets/06b5da15-9e37-456f-a4d4-dbd746fab6ee" />
+
+### 4. RDS 인스턴스 정보
+<img width="1440" alt="RDS 데이터베이스 생성" src="https://github.com/user-attachments/assets/b005041f-1e03-4f39-b7f4-ec40fe254436" />
+<img width="880" alt="RDS 정보" src="https://github.com/user-attachments/assets/ca783cd5-56cf-4011-a739-766494b0a600" />
