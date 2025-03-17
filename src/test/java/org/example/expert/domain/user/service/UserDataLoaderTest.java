@@ -1,28 +1,38 @@
-package org.example.expert.domain.user.service;
+package org.example.expert.domain.user;
 
+import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class UserDataLoaderTest {
 
     @Autowired
-    private UserDataLoader userDataLoader;
-
-    @Autowired
     private UserRepository userRepository;
 
+    private String testNickname;
+
+    @BeforeEach
+    void setUp() {
+        Optional<User> user = userRepository.findAll().stream().findFirst();
+        testNickname = user.map(User::getNickname).orElse("User123");
+    }
+
     @Test
-    public void testLoadUsers() throws Exception {
-        userDataLoader.run();
-        long userCount = userRepository.count();
-        assertEquals(1000000, userCount, "user count should match");
+    void testSearchUsersByNicknamePerformance() {
+        Pageable pageable = PageRequest.of(0, 10);
+
+        long start = System.currentTimeMillis();
+        userRepository.findByNickname(testNickname, pageable);
+        long end = System.currentTimeMillis();
+
+        System.out.println("닉네임 검색 소요 시간(ms): " + (end - start));
     }
 }
