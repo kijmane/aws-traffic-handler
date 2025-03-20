@@ -18,6 +18,7 @@ interface TodoRepository : JpaRepository<Todo, Long>, TodoRepositoryCustom {
         ORDER BY t.modifiedAt DESC
         """
     )
+    // 전체 Todo를 user와 함께 fetchjoin으로 조회 + 최신 수정순 정렬 (페이징 지원)
     fun findAllByOrderByModifiedAtDesc(pageable: Pageable): Page<Todo>
 
     @Query(
@@ -27,6 +28,7 @@ interface TodoRepository : JpaRepository<Todo, Long>, TodoRepositoryCustom {
         WHERE t.id = :todoId
         """
     )
+    // ID를 기준으로 Todo 조회 (user 연관 엔티티까지 함께 조회)
     fun findByIdWithUser(@Param("todoId") todoId: Long): Optional<Todo>
 
     @Query(
@@ -41,6 +43,7 @@ interface TodoRepository : JpaRepository<Todo, Long>, TodoRepositoryCustom {
         ORDER BY t.modifiedAt DESC
         """
     )
+    // 조건에 따라 동적 검색 수행
     fun searchTodos(
         @Param("titleKeyword") titleKeyword: String?,
         @Param("managerNickname") managerNickname: String?,
