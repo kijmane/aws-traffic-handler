@@ -1,4 +1,4 @@
-# AWS 배포 정리
+# AWS
 ### 1. EC2 인스턴스 설정
 <img width="1434" alt="스크린샷 2025-03-14 오후 2 10 12" src="https://github.com/user-attachments/assets/999c0fbe-7ed2-47cb-af47-23906263ac21" />
 
