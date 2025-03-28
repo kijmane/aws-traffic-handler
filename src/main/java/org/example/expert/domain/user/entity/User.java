@@ -12,7 +12,7 @@ import org.example.expert.domain.user.enums.UserRole;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(indexes =@Index(name = "idx_nickname", columnList = "nickname"))
+@Table(name ="`user`")
 public class User extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

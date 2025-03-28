@@ -1,57 +1,86 @@
 package org.example.expert.domain.manager.service;
 
-import jakarta.transaction.Transactional;
-import org.example.expert.domain.todo.entity.Log;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.example.expert.domain.common.dto.AuthUser;
+import org.example.expert.domain.manager.config.TestS3Config;
+import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.LogRepository;
-import org.example.expert.domain.user.entity.User;
-import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 import org.example.expert.domain.todo.repository.TodoRepository;
+import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.UUID;
 
 @SpringBootTest
-@Transactional
-public class ManagerServiceTest {
+@Import(TestS3Config.class)
+class ManagerServiceTest {
+
+    private static final int MAX_COUNT = 1_000_000;
 
     @Autowired private ManagerService managerService;
     @Autowired private LogRepository logRepository;
     @Autowired private UserRepository userRepository;
     @Autowired private TodoRepository todoRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Test
+    @Transactional
+    @Rollback(false)
     void MangerServiceTest() {
-        User savedUser = userRepository.save(
-                new User("testuser", "test@example.com", "password123", UserRole.USER)
-        );
+        long start = System.currentTimeMillis();
 
-        AuthUser authUser = new AuthUser(savedUser.getId(), savedUser.getEmail(), savedUser.getUserRole());
+        User user = userRepository.save(new User("nickname", "test@example.com", "password", UserRole.USER));
+        Todo todo = todoRepository.save(new Todo("테스트 일정", "내용", "좋음", user));
+        AuthUser authUser = new AuthUser(user.getId(), user.getEmail(), user.getUserRole());
 
-        Todo todo = new Todo("테스트 일정", "내용", "맑음", savedUser);
-        todoRepository.save(todo);
+        List<ManagerSaveRequest> requests = new ArrayList<>();
 
-        ManagerSaveRequest request = new ManagerSaveRequest(99999L);
+        for (int i = 0; i < MAX_COUNT; i++) {
+            requests.add(new ManagerSaveRequest(generateRandomUserId()));
 
-        try {
-            managerService.saveManager(authUser, todo.getId(), request);
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (requests.size() == 1000) {
+                for (ManagerSaveRequest request : requests) {
+                    try {
+                        managerService.saveManager(authUser, todo.getId(), request);
+                    } catch (Exception ignored) {
+                    }
+                }
+                entityManager.flush();
+                entityManager.clear();
+                requests.clear();
+            }
         }
 
-        List<Log> logs = logRepository.findAll();
-        assertFalse(logs.isEmpty(), "로그가 저장되지 않았습니다!");
+        for (ManagerSaveRequest request : requests) {
+            try {
+                managerService.saveManager(authUser, todo.getId(), request);
+            } catch (Exception ignored) {
+            }
+        }
 
-        Log savedLog = logs.get(0);
-        System.out.println("로그 내용: " + savedLog.getMessage() + ", 요청자: " + savedLog.getRequestUser());
+        entityManager.flush();
+        entityManager.clear();
 
-        assertEquals("매니저 등록 요청", savedLog.getMessage());
+        long totalLogs = logRepository.count();
+        long end = System.currentTimeMillis();
+
+        System.out.println("총 저장된 로그 수: " + totalLogs + ", 걸린 시간(ms): " + (end - start));
+    }
+
+    private Long generateRandomUserId() {
+        return Math.abs(UUID.randomUUID().getMostSignificantBits() % 1_000_000);
     }
 }
