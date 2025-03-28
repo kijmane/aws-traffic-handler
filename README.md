@@ -13,9 +13,9 @@
 - 배포 후 서버가 정상 작동 중일 때 /health 엔드포인트에 접속한 결과입니다.
 <img width="1207" alt="스크린샷 2025-03-14 오후 2 15 14" src="https://github.com/user-attachments/assets/99684801-e229-4fee-8439-976f9590e3fc" />
 
-### 대용량 트래픽 처리 성능 테스트
-- 총 1,000,000건 저장 성공
-- 소요 시간: 약 70초
-- CPU: 일정하게 유지, 과부하 없음
-- Memory: 지속 증가 → GC 튐 없이 안정적 종료
+### High Traffic Load Performance Test
+> 총 1,000,000건 저장 성공
+> 소요 시간: 약 70초
+> CPU: 일정하게 유지, 과부하 없음
+> Memory: 지속 증가 → GC 튐 없이 안정적 종료
 <img width="1286" alt="스크린샷 2025-03-28 오후 8 22 18" src="https://github.com/user-attachments/assets/fc048f27-ce9d-430e-8ec2-623941e1bf19" />
