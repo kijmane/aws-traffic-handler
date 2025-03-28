@@ -1,10 +1,10 @@
 package org.example.expert.domain.manager.service;
 
 import jakarta.transaction.Transactional;
+import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
-import org.example.expert.domain.todo.entity.Log;
 import org.example.expert.domain.todo.repository.LogRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.enums.UserRole;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class ManagerServiceTest {
+public class ManagerServiceTest {
 
     @Autowired private ManagerService managerService;
     @Autowired private LogRepository logRepository;

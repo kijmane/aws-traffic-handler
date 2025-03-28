@@ -3,8 +3,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
-import org.example.expert.domain.todo.dto.request.TodoSearchCondition;
-import org.example.expert.domain.todo.dto.response.TodoSearchResult;
 import org.example.expert.domain.todo.entity.QTodo;
 import org.example.expert.domain.comment.entity.QComment;
 import org.example.expert.domain.manager.entity.QManager;

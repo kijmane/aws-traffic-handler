@@ -1,4 +1,4 @@
-package org.example.expert.domain.user;
+package org.example.expert.domain.user.service;
 
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;

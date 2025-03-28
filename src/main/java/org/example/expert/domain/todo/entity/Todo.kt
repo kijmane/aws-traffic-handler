@@ -25,11 +25,7 @@ class Todo (
     var comments: MutableList<Comment> = mutableListOf()
 
     @OneToMany(mappedBy = "todo", cascade = [CascadeType.PERSIST])
-    var managers: MutableList<User> = mutableListOf()
-
-    init {
-        managers.add(Manager(user, this))
-    }
+    var managers: MutableList<Manager> = mutableListOf()
 
     constructor() : this("","","",User())
 }
