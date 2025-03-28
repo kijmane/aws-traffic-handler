@@ -22,7 +22,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Cacheable(value = "usersByNickname", key = "#nickname")
-    public Page<User> findUsersByNickname(String nickname, Pageable pageable) {
+    public Page<User> findByNickname(String nickname, Pageable pageable) {
         return userRepository.findByNickname(nickname, pageable);
     }
 

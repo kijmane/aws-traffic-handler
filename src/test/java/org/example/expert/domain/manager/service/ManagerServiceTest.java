@@ -1,7 +1,9 @@
 package org.example.expert.domain.manager.service;
 
 import jakarta.transaction.Transactional;
+import org.example.expert.domain.todo.entity.Log;
 import org.example.expert.domain.todo.entity.Todo;
+import org.example.expert.domain.todo.repository.LogRepository;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
@@ -26,7 +28,7 @@ public class ManagerServiceTest {
     @Autowired private TodoRepository todoRepository;
 
     @Test
-    void 매니저등록_실패해도_로그_저장_해주세요_부탁_드려요() {
+    void MangerServiceTest() {
         User savedUser = userRepository.save(
                 new User("testuser", "test@example.com", "password123", UserRole.USER)
         );

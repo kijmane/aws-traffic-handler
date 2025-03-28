@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param
 import java.time.LocalDate
 import java.util.Optional
 
-interface TodoRepository : JpaRepository<Todo, Long> {
+interface TodoRepository : JpaRepository<Todo, Long>, TodoRepositoryCustom{
 
     @Query(
         """
