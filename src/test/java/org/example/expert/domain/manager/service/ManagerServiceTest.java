@@ -5,7 +5,6 @@ import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
-import org.example.expert.domain.todo.repository.LogRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.enums.UserRole;
 import org.example.expert.domain.user.repository.UserRepository;

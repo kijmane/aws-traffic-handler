@@ -1,7 +1,6 @@
 package org.example.expert.domain.todo.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.expert.domain.todo.repository.LogRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
