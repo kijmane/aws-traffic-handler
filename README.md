@@ -8,8 +8,6 @@
 - Memory : 지속 증가 → GC 튐 없이 안정적 종료
 <img width="1286" alt="스크린샷 2025-03-28 오후 8 22 18" src="https://github.com/user-attachments/assets/fc048f27-ce9d-430e-8ec2-623941e1bf19" />
 
----
-
 ## AWS
 ### EC2
 <img width="1434" alt="스크린샷 2025-03-14 오후 2 10 12" src="https://github.com/user-attachments/assets/999c0fbe-7ed2-47cb-af47-23906263ac21" />
@@ -23,8 +21,6 @@
 ### Health Check API
 > 배포 후 서버가 정상 작동 중일 때 /health 엔드포인트에 접속한 결과입니다.
 <img width="1207" alt="스크린샷 2025-03-14 오후 2 15 14" src="https://github.com/user-attachments/assets/99684801-e229-4fee-8439-976f9590e3fc" />
-
----
 
 ## Kotlin Conversion
 - 기존 Java 기반 프로젝트를 Kotlin으로 전환
