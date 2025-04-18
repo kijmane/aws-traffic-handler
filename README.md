@@ -1,5 +1,4 @@
 # Practical Problem Solving Experience
-> 프로젝트에서 주어진 문제를 중심으로 원인 분석과 코드 개선을 직접 수행하며 실무에 필요한 기술 역량을 다졌습니다.
 
 ## High Traffic Load Performance Test
 - 총 1,000,000건의 매니저 등록 요청 처리 및 로그 저장
