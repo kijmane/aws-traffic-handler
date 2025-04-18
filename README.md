@@ -1,5 +1,3 @@
-# Practical Problem Solving Experience
-
 ## High Traffic Load Performance Test
 - 총 1,000,000건의 매니저 등록 요청 처리 및 로그 저장
 - 소요 시간: 약 70초
